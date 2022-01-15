@@ -55,3 +55,58 @@ const getClassName = (key) => {
     return "textarea-present";
   }
 };
+
+
+
+const renderTimeBlocks = () => {
+  const constructTimeBlocks = (each) => {
+    //render timeBlock
+    const timeBlock = `<div class="card-container" id="card-container">
+      <div class="hour-container">
+        <h2 class="hour">${each.label}</h2>
+      </div>
+      <div class="${getClassName(each.key)}">
+        <textarea class="textarea" id=${each.key} data="${each.key}">${
+      getTextAreaValue(each.key) || ""
+    }</textarea>
+      </div>
+      <div id="btn-container" class="btn-container">
+        <button name="save-btn" id=${
+          each.key
+        } class="save-btn"><i name="save-icon" id=${
+      each.key
+    } class="far fa-save"></i></i></button>
+      </div>
+    </div>`;
+
+    return timeBlock;
+  };
+
+  //map over the timeBlockLabels to construct each TimeBlock
+  const timeBlocks = timeBlockLabels.map(constructTimeBlocks).join("");
+
+  //append to main
+  $("#time-block-container").append(timeBlocks);
+};
+
+const renderCurrentDay = () => {
+  currentDay.text(moment().format("dddd MMMM Do YYYY"));
+};
+
+const setClock = () => {
+  clockContainer.text(moment().format("kk:mm:ss"));
+};
+
+const renderClock = () => {
+  setInterval(setClock, 1000);
+};
+
+const onLoad = () => {
+  renderCurrentDay();
+
+  setClock();
+
+  renderClock();
+
+  renderTimeBlocks();
+};
