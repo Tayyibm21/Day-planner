@@ -110,3 +110,21 @@ const onLoad = () => {
 
   renderTimeBlocks();
 };
+
+
+
+const onClear = () => {
+  localStorage.clear();
+
+  $("#time-block-container").empty();
+
+  renderTimeBlocks();
+};
+
+// add a event listener click to save button
+$("#time-block-container").on("click", onSave);
+
+// add a event listener click to clear all button
+$("#clear-all-btn").on("click", onClear);
+
+$(document).ready(onLoad);
