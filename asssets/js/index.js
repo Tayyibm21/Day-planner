@@ -34,8 +34,6 @@ currentTime();
 // Target save button
 const button = $(".saveBtn");
 
-/
-
 button.on("click", function () {
   const time = $(this).parent().attr("id");
   const schedule = $(this).siblings(".schedule").val();
